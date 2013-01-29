@@ -1,0 +1,238 @@
+<html>
+<head>
+	<title>termlib Multiple Terminal Test</title>
+	<script language="JavaScript" type="text/javascript" src="termlib.js"></script>
+
+<style type="text/css">
+
+/* essential terminal styles */
+
+.term {
+	font-family: courier,fixed,swiss,sans-serif;
+	font-size: 12px;
+	color: #33d011;
+	background: none;
+}
+.termReverse {
+	color: #111111;
+	background: #33d011;
+}
+
+/* other page styles */
+
+body,p,a,td {
+	font-family: courier,fixed,swiss,sans-serif;
+	font-size: 12px;
+	color: #cccccc;
+}
+.lh15 {
+	line-height: 15px;
+}
+a,a:link,a:visited {
+	text-decoration: none;
+	color: #77dd11;
+}
+a:hover {
+	text-decoration: underline;
+	color: #77dd11;
+}
+a:active {
+	text-decoration: underline;
+	color: #dddddd;
+}
+
+a.termopen,a.termopen:link,a.termopen:visited {
+	text-decoration: none;
+	color: #77dd11;
+	background: none;
+}
+a.termopen:hover {
+	text-decoration: none;
+	color: #222222;
+	background: #77dd11;
+}
+a.termopen:active {
+	text-decoration: none;
+	color: #222222;
+	background: #dddddd;
+}
+
+</style>
+</head>
+
+
+<body bgcolor="#222222" link="#77dd11" text="#cccccc" alink="#dddddd" vlink="#77dd11"
+topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" marginheight="0" marginwidth="0">
+<div id="termDiv" style="position:absolute; top:20px; left:100px"></div>
+</body>
+<script language="JavaScript" type="text/javascript">
+	term=new Terminal(
+		{
+			x: 220,
+			y: 10,
+			rows: 30,
+			greeting: '%+r +++ Terminal ready. +++ %-r%nType "help" for help.%n',
+			id: 0,
+			termDiv: 'termDiv',
+			crsrBlinkMode: true,
+			blinkDelay: 700,
+			handler: termHandler,
+		}
+	);
+
+	term.open();
+	writeToTerminal( term, 30, greeting() );
+	
+	var LINES = 30;
+	var COLUMNS = 79;
+	
+	function padString( str, length ){
+		if ( str.length >= length ){
+			return str;
+		}
+		return padString(' ' + str + ' ', length);
+	}
+	
+	GreetingFatGoblin = {
+		unvisited : "It looks like there are markings on the walls.\n",
+		visited : "Fat Goblin rolled over."
+	}
+	
+	function greeting(){
+		greet = "\n\n\n\n\n";
+		greet += padString( "The Wumpus Game", 78 ) + "\n\n";
+		greet += "\n";
+		greet += padString( "Version 0.0", 78 ) + "\n";
+		greet += padString( "by Alexandru Pana", 78 ) + "\n";
+		greet += padString( "This game is open source and freely distributable!", 78 ) + "\n\n";
+		greet += "\n";
+		greet += padString( "Help poor children in Uganda!", 78 ) + "\n";
+		greet += padString( "type %c(9)help iccf%c(0)       for information               ", 88 ) + "\n";
+		greet += "\n";
+		greet += padString( "type %c(9)help rules%c(0)      for information about the game", 88 ) + "\n";
+		greet += padString( "type %c(9)help actions%c(0)    for a list of commands        ", 88 ) + "\n";
+		greet += padString( "type %c(9)start%c(0)           to begin your journey         ", 88 ) + "\n";
+		return greet;
+	}
+	
+	function iccf(){
+		iccf = "\n\n\n\n\n\n";
+		iccf += padString( "The Wumpus Game is Charityware. You can use and copy it", 78 ) + "\n";
+		iccf += padString( "as much as you like, but you are encouraged to make a  ", 78 ) + "\n";
+		iccf += padString( "donation the the needy children in Uganda. Please visit", 78 ) + "\n";
+		iccf += padString( "the ICCF website, available at these URLS:             ", 78 ) + "\n";
+		iccf += "\n";
+		iccf += padString( "       %c(5)http://iccf-holland.org                        ", 78 ) + "\n";
+		iccf += padString( "       http://www.vim.org/iccf                             ", 78 ) + "\n";
+		iccf += padString( "       http://www.iccf.nl%-u%c(0)                          ", 78 ) + "\n";
+		iccf += "\n";
+		iccf += padString( "Thanks!                                                ", 78 ) + "\n";
+		iccf += "\n";
+		iccf += padString( "type %c(9)home%c(0)        to return to the home screen", 78 ) + "\n";
+		return iccf;
+	}
+	
+	function helpRules(){
+		help = "  ";
+		help += "\n\n";
+		help += "    You are in a windy room.\n\n";
+		help += "    There are tunnels leading in every direction.\n";
+		help += "\n";
+		help += "    ~~~  You sense a breeze.";
+		help += "\n\n\n\n\n\n";
+		help += "        It looks like there are markings on the walls.\n";
+		help += "        You try to understand their meaning but it seems\n";
+		help += "        to be mindless gibberish. Something about a cake.\n";
+		help += "        And something about a lie.\n";
+		
+		return description;
+	}
+	
+	function describeEntrance(){
+		description = "  ";
+		description += "\n\n";
+		description += "    You are in a large, sunlight room.\n\n";
+		description += "    There are tunnels leading in every direction.\n";
+		description += "\n";
+		description += "    ~~~  You see the rays shining through the opening.";
+		description += "\n\n\n\n\n\n";
+		description += "        There is a rope ladder here.\n";
+		
+		return description;
+	}
+	
+	function describe(){
+		description = "  ";
+		description += "\n\n";
+		description += "    You are in a windy room.\n\n";
+		description += "    There are tunnels leading in every direction.\n";
+		description += "\n";
+		description += "    ~~~  You sense a breeze.";
+		description += "\n\n\n\n\n\n";
+		description += "        It looks like there are markings on the walls.\n";
+		description += "        You try to understand their meaning but it seems\n";
+		description += "        to be mindless gibberish. Something about a cake.\n";
+		description += "        And something about a lie.\n";
+		
+		return description;
+	}
+	
+	function header(){
+		return "%+r The Wumpus Game                                                                %-r";
+	}
+	
+	function writeToTerminal( term, lines, msg ){
+		term.clear();
+		term.write(header());
+		term.write(msg);
+		for( i = 0; i < lines - msg.split('\n').length - 1; ++i ){
+			term.write('\n');
+		}
+		term.prompt();
+	}
+	
+	function unlock( term ){
+		term.lock=false;
+		term.cursorOn();
+	}
+	
+	function clearCommand( term ){
+		for( i = 0; i < 80; ++i ){
+			term.backspace();
+		}
+	}
+	
+	function complain( term, cmd ){
+		term.typeAt( 26, 6, "                                                                         ");
+		if( cmd.length > 20 ){
+			term.typeAt( 26, 4, "That's too long for me to understand.", 2*256 );
+			return;
+		}
+		term.typeAt( 26, 4, "I don't know the word \"" + cmd + "\"", 2*256 );	
+	}
+	
+	function termHandler() {
+		var cmd=this.lineBuffer;
+		
+		if( cmd == '' ){
+			unlock(this);
+		} else if( cmd == 'home' ){
+			writeToTerminal( this, 30, greeting() );
+			return;
+		} else if( cmd == 'debug' ){
+			writeToTerminal( this, 30, "You sense a breeze" );
+			return;
+		} else if (cmd=='start') {
+			writeToTerminal( this, 30, describe() );
+			return;
+		} else if (cmd=='help iccf'){
+			writeToTerminal( this, 30, iccf() );
+			return;
+		}
+		complain( this, cmd );
+		clearCommand(this);
+		unlock(this);
+	}
+</script>
+
+</html>
