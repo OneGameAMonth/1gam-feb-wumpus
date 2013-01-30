@@ -51,10 +51,11 @@ a.termopen:active {
 }
 
 div#term{
-    position:absolute; 
-    top:20px; 
-    left:100px
+    margin-left:auto;
+    margin-right:auto;
+    width: 570px;
 }
+
 body{
     background-color:#222222;
     color:#cccccc;

@@ -1,7 +1,7 @@
 $(document).ready( function(){
     term=new Terminal(
         {
-            x: 220,
+            x: 0,
             y: 10,
             rows: 30,
             termDiv: 'term',
